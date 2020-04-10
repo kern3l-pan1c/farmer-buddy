@@ -1,0 +1,4 @@
+ionic cordova plugin add cordova-plugin-android-permissions
+ionic cordova plugin add cordova-plugin-request-location-accuracy
+ionic cordova plugin add cordova-plugin-geolocation
+ionic cordova plugin add cordova-plugin-nativegeocoder
