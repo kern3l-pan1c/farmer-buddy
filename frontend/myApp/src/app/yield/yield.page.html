@@ -5,5 +5,15 @@
 </ion-header>
 
 <ion-content>
-  {{ reverseGeocodingResults }}
+  <ion-tab-bar>
+    <ion-tab-button tab="cropundecided">
+      <ion-icon name="send"></ion-icon>
+      <ion-label>Yet to decide the crop?</ion-label>
+    </ion-tab-button>
+    <br>
+    <ion-tab-button tab="cropdecided">
+      <ion-icon name="send"></ion-icon>
+      <ion-label>I know what to plant</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
 </ion-content>

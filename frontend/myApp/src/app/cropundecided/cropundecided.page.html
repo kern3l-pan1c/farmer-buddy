@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>cropdecided</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-item>
+            <ion-item>
+                <ion-label>Soil Type</ion-label>
+                <ion-select [(ngModel)]="soil_type" value="sandy">
+                    <ion-select-option value="sandy">Sandy</ion-select-option>
+                    <ion-select-option value="clay">Clay</ion-select-option>
+                </ion-select>
+            </ion-item>
+        </ion-item>
+        <ion-item>
+            <ion-item>
+                <ion-label>Season</ion-label>
+                <ion-select [(ngModel)]="season" value="summer">
+                    <ion-select-option value="summer">Summer</ion-select-option>
+                    <ion-select-option value="winter">Winter</ion-select-option>
+                </ion-select>
+            </ion-item>
+        </ion-item>
+    </ion-list>
+    <ion-button (click)="cropSureSend()" color="dark" expand="block" fill="solid">Predict</ion-button>
+</ion-content>

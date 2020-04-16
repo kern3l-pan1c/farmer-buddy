@@ -15,6 +15,7 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx'
 import { Geolocation } from '@ionic-native/geolocation/ngx'
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,7 +25,8 @@ import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
     IonicModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    HttpClientModule
 
   ],
   providers: [

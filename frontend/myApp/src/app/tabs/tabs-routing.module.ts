@@ -15,6 +15,14 @@ const routes: Routes = [
         path: 'fertilizer',
         loadChildren: () => import('../fertilizer/fertilizer.module').then( m => m.FertilizerPageModule)
       },
+        {
+          path: 'cropundecided',
+          loadChildren: () => import('../cropundecided/cropundecided.module').then( m => m.CropundecidedPageModule)
+        },
+        {
+          path: 'cropdecided',
+          loadChildren: () => import('../cropdecided/cropdecided.module').then( m => m.CropdecidedPageModule)
+        },
     ]
 
   }
