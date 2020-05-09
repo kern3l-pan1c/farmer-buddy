@@ -2,6 +2,7 @@ from app import app, models, models_rain, crops, soils
 from flask import request, Response
 import json
 from datetime import datetime
+import requests
 
 
 @app.route('/')
@@ -119,4 +120,24 @@ def predict_crop():
         pred_list[0].append(soil_val[s])
     yeild_pred = model.predict(pred_list)
     response_dict = dict({crop: yeild_pred.tolist()[0]})
+    return Response(status=200, response=json.dumps(response_dict))
+
+
+@app.route('/fertilizer', methods=['POST'])
+def fertilizer():
+    data = json.loads(request.data)
+    location = json.loads(data['location'])
+    api_key = 'ceb603d24b0f81224aed89f0e14b31ee'
+    owresp = requests.get('https://api.openweathermap.org/data/2.5/onecall' +
+                          '?lat=' + str(location['latitude']) +
+                          '&lon=' + str(location['longitude']) +
+                          '&exclude=current,minutely,hourly' +
+                          '&appid=' + api_key)
+    ow = owresp.json()
+    message = 'You can add fertilizers. No heavy rains predicted in the next 15 days'
+    for item in ow.get('daily', None):
+        if item.get("rain", 0) > 25:
+            message = 'Please do not add fertilizers as there are heavy rains predicted on ' \
+                      'one or more days in the next 15 days.'
+    response_dict = {'message': message}
     return Response(status=200, response=json.dumps(response_dict))
