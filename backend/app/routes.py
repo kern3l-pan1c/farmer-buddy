@@ -52,7 +52,21 @@ def predict_all():
     model_rain = models_rain.get(dist_name, None)
     crop_list = crops.get(dist_name, None)
     soil_list = soils.get(dist_name, None)
-    rain_pred = model_rain.predict([[year, 0, 1]])
+    season = get_season()
+    pred_list = [[year]]
+    if season == 'Kharif':
+        pred_list[0].append(1)
+        pred_list[0].append(0)
+        pred_list[0].append(0)
+    elif season == 'Rabi':
+        pred_list[0].append(0)
+        pred_list[0].append(1)
+        pred_list[0].append(0)
+    else:
+        pred_list[0].append(0)
+        pred_list[0].append(0)
+        pred_list[0].append(1)
+    rain_pred = model_rain.predict(pred_list)
     rain = rain_pred[0][0]
     temp = rain_pred[0][1]
     response_dict = {}
@@ -69,7 +83,19 @@ def predict_all():
                 crop_val[c] = 1
             else:
                 crop_val[c] = 0
-        pred_list = [[area, rain, temp, 0, 1]]
+        pred_list = [[area, rain, temp]]
+        if season == 'Kharif':
+            pred_list[0].append(1)
+            pred_list[0].append(0)
+            pred_list[0].append(0)
+        elif season == 'Rabi':
+            pred_list[0].append(0)
+            pred_list[0].append(1)
+            pred_list[0].append(0)
+        else:
+            pred_list[0].append(0)
+            pred_list[0].append(0)
+            pred_list[0].append(1)
         for c in crop_list:
             pred_list[0].append(crop_val[c])
         for s in soil_list:
@@ -93,6 +119,7 @@ def predict_crop():
     crop = data['crop']
     soil = data['soil']
     year = datetime.utcnow().year
+    season = get_season()
     dist_name = state + '_' + dist
     model = models.get(dist_name, None)
     model_rain = models_rain.get(dist_name, None)
@@ -110,10 +137,35 @@ def predict_crop():
             soil_val[s] = 1
         else:
             soil_val[s] = 0
-    rain_pred = model_rain.predict([[year, 0, 1]])
+    pred_list = [[year]]
+    if season == 'Kharif':
+        pred_list[0].append(1)
+        pred_list[0].append(0)
+        pred_list[0].append(0)
+    elif season == 'Rabi':
+        pred_list[0].append(0)
+        pred_list[0].append(1)
+        pred_list[0].append(0)
+    else:
+        pred_list[0].append(0)
+        pred_list[0].append(0)
+        pred_list[0].append(1)
+    rain_pred = model_rain.predict(pred_list)
     rain = rain_pred[0][0]
     temp = rain_pred[0][1]
-    pred_list = [[area, rain, temp, 0, 1]]
+    pred_list = [[area, rain, temp]]
+    if season == 'Kharif':
+        pred_list[0].append(1)
+        pred_list[0].append(0)
+        pred_list[0].append(0)
+    elif season == 'Rabi':
+        pred_list[0].append(0)
+        pred_list[0].append(1)
+        pred_list[0].append(0)
+    else:
+        pred_list[0].append(0)
+        pred_list[0].append(0)
+        pred_list[0].append(1)
     for c in crop_list:
         pred_list[0].append(crop_val[c])
     for s in soil_list:
@@ -141,3 +193,12 @@ def fertilizer():
                       'one or more days in the next 15 days.'
     response_dict = {'message': message}
     return Response(status=200, response=json.dumps(response_dict))
+
+
+def get_season():
+    month = datetime.utcnow().month
+    if 3 <= month <= 6:
+        return 'Summer'
+    if 7 <= month <= 10:
+        return 'Kharif'
+    return 'Rabi'

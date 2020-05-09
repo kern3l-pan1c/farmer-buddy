@@ -17,9 +17,12 @@ states = data.groupby(by='State')
 for state, state_data in states:
     district = state_data.groupby(by='District')
     for dist, dist_data in district:
+        del dist_data['State']
+        del dist_data['District']
         dist_data_orig = deepcopy(dist_data)
         del dist_data['Year']
-        df_data = pd.get_dummies(dist_data, drop_first=True)
+        df_data = pd.get_dummies(dist_data, drop_first=False)
+
         col_y = 'Production'
         X = df_data.drop(col_y, axis=1)
         X = X.fillna(X.mean())
@@ -42,7 +45,8 @@ for state, state_data in states:
         del dist_data_orig['Area']
         del dist_data_orig['Production']
         del dist_data_orig['SoilType']
-        df_data = pd.get_dummies(dist_data_orig, drop_first=True)
+        df_data = pd.get_dummies(dist_data_orig, drop_first=False)
+        print(df_data.columns)
         col_y = ['Avg Rainfall', 'Avg Temperature']
         X = df_data.drop(col_y, axis=1)
         X = X.fillna(X.mean())
