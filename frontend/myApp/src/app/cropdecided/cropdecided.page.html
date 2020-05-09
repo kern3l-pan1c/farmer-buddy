@@ -1,9 +1,31 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>cropdecided</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>cropdecided</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-crop undecided
+    <ion-list>
+        <ion-item>
+            <ion-label>Select Crop</ion-label>
+            <ion-select [(ngModel)]="crop">
+                <ion-select-option *ngFor="let item of cropList" [value]="item">
+                    {{item}}
+                </ion-select-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label>Select Soil</ion-label>
+            <ion-select [(ngModel)]="soil">
+                <ion-select-option *ngFor="let item of soilList" [value]="item">
+                    {{item}}
+                </ion-select-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label>Area</ion-label>
+            <ion-input [(ngModel)]="area" placeholder="area"></ion-input>
+        </ion-item>
+    </ion-list>
+    <ion-button (click)="cropSureSend()" color="dark" expand="block" fill="solid">Predict</ion-button>
 </ion-content>

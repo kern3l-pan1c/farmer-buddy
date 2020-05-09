@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {TabsPage} from "../tabs/tabs.page";
-import {HttpClient} from "@angular/common/http";
+import { TabsPage } from "../tabs/tabs.page";
+import { HttpClient } from "@angular/common/http";
+import { Platform } from '@ionic/angular'
+import backend_url from '../configs'
 
 @Component({
   selector: 'app-cropundecided',
@@ -9,31 +11,45 @@ import {HttpClient} from "@angular/common/http";
 })
 export class CropundecidedPage implements OnInit {
 
-  soil_type:string = ""
-  season:string = ""
+  soil: string = ""
+  area: string = ""
   reverseGeocodingResults: string = ""
+  soilList: any = []
+  respArray: any = []
 
   constructor(
-      public tabs: TabsPage,
-      public http: HttpClient
+    public tabs: TabsPage,
+    public http: HttpClient,
+    public platform: Platform
   ) {
-    this.reverseGeocodingResults = this.tabs.reverseGeocodingResults;
-   }
+    this.platform.ready().then(() => {
+      this.reverseGeocodingResults = this.tabs.reverseGeocodingResults;
+      let requestBody = {
+        'location': this.reverseGeocodingResults
+      }
+      this.http.post(backend_url + '/soil_list', requestBody).subscribe((response) => {
+        this.soilList = response;
+        console.log(this.soilList)
+      });
+    })
+
+  }
 
   ngOnInit() {
   }
 
-  cropSureSend(){
-    const { soil_type, season } = this
+  cropUnsureSend(){
+    const { soil, area } = this
     console.log(this.reverseGeocodingResults)
     let requestBody = {
-      'soil': soil_type,
-      'season': season,
+      'soil': soil,
+      'area': area,
       'location': this.reverseGeocodingResults
     }
     console.log(this.reverseGeocodingResults)
-    this.http.post('http://192.168.1.9:5000/yield/unsure', requestBody).subscribe((response) => {
-      console.log(response);
+    this.http.post(backend_url+'/yield/unsure', requestBody).subscribe((response) => {
+      var resp_array = Object.entries(response).map(([type, value]) => ({type, value}));
+      this.respArray = resp_array
     });
   }
 }

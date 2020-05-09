@@ -10,6 +10,7 @@ export class YieldPage implements OnInit {
   reverseGeocodingResults: string = ""
   constructor(public tabs: TabsPage) {
     this.reverseGeocodingResults = this.tabs.reverseGeocodingResults;
+    console.log(this.reverseGeocodingResults)
    }
 
   ngOnInit() {

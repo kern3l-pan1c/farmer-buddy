@@ -1,4 +1,4 @@
-State,District,Year,Season,Crop,Area,Production,SoilType,Avg Rainfall(mm),Avg Temperature
+State,District,Year,Season,Crop,Area,Production,SoilType,Avg Rainfall,Avg Temperature
 Maharashtra,AHMEDNAGAR,1997.0,Kharif,Arhar/Tur,17600.0,6300.0,Loamy,184.63,22.6
 Maharashtra,AKOLA,1997.0,Kharif,Arhar/Tur,81200.0,64400.0,Loamy,184.63,22.6
 Maharashtra,AMRAVATI,1997.0,Kharif,Arhar/Tur,83400.0,61300.0,Loamy,184.63,22.6

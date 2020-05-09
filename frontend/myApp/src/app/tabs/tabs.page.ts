@@ -23,7 +23,7 @@ export class TabsPage implements OnInit {
     public alert: AlertController,
     public geolocation: Geolocation,
     public geocoder: NativeGeocoder,
-    public platform: Platform,
+    public platform: Platform
   ) {
 
       this.platform.ready().then(()=>{
