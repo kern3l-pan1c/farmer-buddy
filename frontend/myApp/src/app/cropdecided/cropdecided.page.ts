@@ -56,7 +56,7 @@ export class CropdecidedPage implements OnInit {
     }
     console.log(this.reverseGeocodingResults)
     this.http.post(backend_url+'/yield/sure', requestBody).subscribe((response) => {
-      this.showAlert('Prediction', response[crop])
+      this.showAlert('Prediction', response[crop] + " kg/sq hectare")
     });
   }
 
