@@ -41,3 +41,7 @@
 11. Connect an android phone to your machine using USB. (Make sure developer mode and USB debugging is enabled on your phone. Also, the phone should be on the same network as the running flask app)
 12. Build the application using the command -> ionic cordova build android
 13. Run the application on your phone using -> ionic cordova run android --ssl (Make sure your phone is not locked/on standby mode)
+
+
+
+This repository is authored by: Kumar Shaurya (https://github.com/kern3l-pan1c), Karuna Rohilla (https://github.com/KarunaRohilla1), Anmol (https://github.com/Anmol-Mehta97) and B R Aishwayra (https://github.com/Aishwarya-br)
