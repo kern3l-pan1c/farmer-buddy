@@ -44,4 +44,4 @@
 
 
 
-This repository is authored by: Kumar Shaurya (https://github.com/kern3l-pan1c), Karuna Rohilla (https://github.com/KarunaRohilla1), Anmol (https://github.com/Anmol-Mehta97) and B R Aishwayra (https://github.com/Aishwarya-br)
+This repository is authored by: Kumar Shaurya (https://github.com/kern3l-pan1c), Karuna Rohilla (https://github.com/KarunaRohilla1), Anmol (https://github.com/Anmol-Mehta97) and B R Aishwarya (https://github.com/Aishwarya-br)
